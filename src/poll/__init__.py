@@ -5,6 +5,12 @@ import collections
 import inspect
 import time
 from functools import wraps
+import sys
+
+if '{}.{}'.format(sys.version_info.major, sys.version_info.minor) < '3.3':
+    from compat import TimeoutError
+    from compat import inspect as inspect
+    time.perf_counter = time.clock
 
 
 def poll(until, timeout=15, interval=1):
